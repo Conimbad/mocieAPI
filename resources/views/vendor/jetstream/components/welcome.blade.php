@@ -4,7 +4,11 @@
         Movie Application Manager!
     </div>
     <div class="mt-4">
+        <div class="hidden">
+            <livewire:favorites/>
+        </div>
         <livewire:search/>
+        <livewire:movie/>
     </div>
 
 

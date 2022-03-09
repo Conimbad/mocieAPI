@@ -1039,12 +1039,6 @@ select {
 .-mt-px {
   margin-top: -1px;
 }
-.mt-0\.5 {
-  margin-top: 0.125rem;
-}
-.mt-0 {
-  margin-top: 0px;
-}
 .block {
   display: block;
 }
@@ -1389,17 +1383,17 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
-.bg-sky-500 {
+.bg-orange-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(14 165 233 / var(--tw-bg-opacity));
+  background-color: rgb(249 115 22 / var(--tw-bg-opacity));
 }
 .bg-rose-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(244 63 94 / var(--tw-bg-opacity));
 }
-.bg-orange-500 {
+.bg-sky-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(249 115 22 / var(--tw-bg-opacity));
+  background-color: rgb(14 165 233 / var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
@@ -1551,14 +1545,6 @@ select {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
-.text-9xl {
-  font-size: 8rem;
-  line-height: 1;
-}
-.text-8xl {
-  font-size: 6rem;
-  line-height: 1;
-}
 .text-7xl {
   font-size: 4.5rem;
   line-height: 1;
@@ -1568,12 +1554,6 @@ select {
 }
 .font-semibold {
   font-weight: 600;
-}
-.font-black {
-  font-weight: 900;
-}
-.font-\[1000\] {
-  font-weight: 1000;
 }
 .font-normal {
   font-weight: 400;

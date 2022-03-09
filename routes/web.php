@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Welcome;
+use App\Http\Livewire\Favorites;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [Welcome::class, 'index']);
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/favorites', Favorites::class)->name('favorites');
+    Route::get('/dashboard', function () {
+
+        return view('dashboard');
+    })->name('dashboard');
+});
+
+/* Route::middleware(['auth:sanctum', 'verified'])->get('/favorites', Favorites::class)->name('favorites');
+ */
