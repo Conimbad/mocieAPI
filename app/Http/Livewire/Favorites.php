@@ -9,28 +9,33 @@ use Livewire\Component;
 
 class Favorites extends Component
 {
-    public $message = 'Added caorrectly';
     //Listener del evento mandado en el controlador Movie
     protected $listeners = ['addFavorite'=>'saveMovie'];
     // 
     public $saveIdMovie;
     public $favorites;
-
+    public $idMovieToFind;
+    public $userId;
     public function saveMovie($movie) {
         $favorite = new Favorite;
         // Obteniendo id de usuario activo
         $user = auth()->user();
-        $userId = $user->id;
+        $this->userId = $user->id;
         // Datos de la pelicula
         $this->saveIdMovie = $movie;
-        $favorite->id_movie = $this->saveIdMovie['imdbID']; 
-        $favorite->img = $this->saveIdMovie['Poster'];
-        $favorite->title = $this->saveIdMovie['Title'];
-        $favorite->year = $this->saveIdMovie['Year'];
-        $favorite->id_user = $userId;
-        $favorite->save();
-        return $this->message;
-        
+        $this->idMovieToFind = $this->saveIdMovie['imdbID'];
+        if($favorite->firstWhere('id_movie', $this->idMovieToFind) != null) {
+            $this->emit('noAdded');           
+        }else {
+            $favorite->firstOrNew([
+                'id_movie' => $this->saveIdMovie['imdbID'],
+                'img' => $this->saveIdMovie['Poster'],
+                'title' => $this->saveIdMovie['Title'],
+                'year' => $this->saveIdMovie['Year'],
+                'id_user' => $this->userId,
+            ])->save();
+            $this->emit('added');
+        }
     }
 
     public function retrievingMovie() {
@@ -40,9 +45,12 @@ class Favorites extends Component
     public function removeMovie($id) {
         $favoriteId = new Favorite;
         $favoriteId->destroy($id);
+        session()->flash('message', 'Movie deleted');
     }
     public function render() {
-        $this->favorites = Favorite::all();
+        $user = auth()->user();
+        $userId = $user->id;
+        $this->favorites = Favorite::where('id_user', $userId)->get();
         return view('livewire.favorites');
     }
 }
